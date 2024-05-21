@@ -1,0 +1,23 @@
+.container {
+  width: 19.4%;
+  background-color: #f2ebf9;
+  height: 2644px;
+  padding-left: 24px;
+  padding-top: 24px;
+  padding-right: 77px;
+}
+
+.imgContainer {
+  max-width: 178px;
+  height: 32px;
+  position: relative;
+}
+
+.imgContainer img {
+  max-width: 100%;
+  height: auto;
+}
+
+.buttonContainer {
+  margin-top: 80px;
+}

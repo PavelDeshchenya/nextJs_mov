@@ -1,0 +1,19 @@
+.button {
+  border: none;
+  width: 232px;
+  height: 42px;
+  font-size: 16px;
+  font-weight: 400;
+  background-color: #f2ebf9;
+  text-align: start;
+  padding-left: 10px;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+.activeButton {
+  background-color: #e5d5fa;
+  color: #9854f6;
+  font-weight: 700;
+  border-radius: 5px;
+}

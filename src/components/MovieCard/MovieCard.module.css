@@ -1,0 +1,99 @@
+.moviesContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  flex-wrap: wrap;
+}
+
+.cardContainer {
+  width: 69%;
+  display: flex;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.imgContainer {
+  min-width: 250px;
+  height: 352px;
+  margin-right: 16px;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.descContainer {
+  display: flex;
+  flex-direction: column;
+}
+.descContainer_Title {
+  font-size: 20px;
+  line-height: 24px;
+  color: #9854f6;
+  font-weight: 600;
+}
+
+.descContainer_Year {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 16px;
+  line-height: 20px;
+  color: #7b7c88;
+  font-weight: 400;
+}
+
+.descContainer_Rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 116px;
+}
+
+.descContainer_RatingImgContainer {
+  height: 28px;
+}
+.descContainer_RatingImgContainer img {
+}
+
+.descContainer_RatingValue {
+  display: flex;
+}
+
+.descContainer_RatingValue_Average {
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+  font-weight: 600;
+  margin-right: 8px;
+  margin-left: 4px;
+  align-self: center;
+}
+.descContainer_RatingValue_Total {
+  color: #7b7c88;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+  margin-right: 8px;
+}
+
+.descContainer_Genre {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: start;
+}
+
+.descContainer_GenreList {
+  color: #000000;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.descContainer_GenreList:not(:last-child)::after {
+  content: ",  ";
+}
