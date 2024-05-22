@@ -1,7 +1,7 @@
 import styles from "./MovieCard.module.css";
 import getRate from "@/utils/getRate";
 
-export default function MovieCard({ movie }) {
+export default function MovieCard({ movie }: any) {
   return (
     <div className={styles.moviesContainer}>
       <div className={styles.cardContainer} key={movie.id}>
@@ -47,12 +47,7 @@ export default function MovieCard({ movie }) {
             <p className={styles.descContainer_RatingValue_Total}>
               Gross worldwide {}
             </p>
-            <p className={styles.descContainer_RatingValue_Total}>
-              Genres
-              {/* {movie.genres.map((genre) => {
-                return <p key={genre.id}>{genre.name}</p>;
-              })} */}
-            </p>
+            <p className={styles.descContainer_RatingValue_Total}>Genres</p>
           </div>
         </div>
       </div>
