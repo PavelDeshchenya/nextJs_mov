@@ -3,9 +3,19 @@ import styles from "./Pagination.module.css";
 
 import SvgLeft from "./SvgArrow/SvgLeft";
 import SvgRight from "./SvgArrow/SvgRight";
+interface PaginationProps {
+  pagesCount: number;
+  onPageChange: (page: number) => void;
+  currentPage: number;
+}
 
-export default function Pagination({ pagesCount, onPageChange, currentPage }) {
-  const [visiblePages, SetVisiblePages] = useState([1, 2, 3]);
+const Pagination: React.FC<PaginationProps> = ({
+  pagesCount,
+  onPageChange,
+  currentPage,
+}) => {
+  const [visiblePages, setVisiblePages] = useState<number[]>([1, 2, 3]);
+
   useEffect(() => {
     const startPage = Math.max(currentPage - 1, 1);
     const endPage = Math.min(startPage + 2, pagesCount);
@@ -13,7 +23,7 @@ export default function Pagination({ pagesCount, onPageChange, currentPage }) {
       { length: endPage - startPage + 1 },
       (_, i) => startPage + i
     );
-    SetVisiblePages(newVisiblePages);
+    setVisiblePages(newVisiblePages);
   }, [currentPage, pagesCount]);
 
   return (
@@ -47,4 +57,6 @@ export default function Pagination({ pagesCount, onPageChange, currentPage }) {
       </button>
     </div>
   );
-}
+};
+
+export default Pagination;
