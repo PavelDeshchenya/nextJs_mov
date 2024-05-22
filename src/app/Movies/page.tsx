@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import styles from "./Movies.module.css";
 
 import MoviesCards from "@/components/MoviesCards/MoviesCards";
@@ -11,7 +11,7 @@ export default function Movies() {
   const [genres, setGenres] = useState([]);
   const [page, setPage] = useState(1);
 
-  function onPageChange(page) {
+  function onPageChange(page: SetStateAction<number>) {
     setPage(page);
   }
 
