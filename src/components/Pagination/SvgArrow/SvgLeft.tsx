@@ -1,6 +1,10 @@
 import styles from "../Pagination.module.css";
 
-export default function SvgLeft({ currentPage }) {
+interface SvgLeftProps {
+  currentPage: number;
+}
+
+export default function SvgLeft({ currentPage }: SvgLeftProps) {
   const arrColorDisable = "#D5D6DC";
   const arrColorActive = "#7B7C88";
   return (

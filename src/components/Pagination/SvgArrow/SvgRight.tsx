@@ -1,6 +1,11 @@
 import styles from "../Pagination.module.css";
 
-export default function SvgRight({ currentPage, pagesCount }) {
+interface SvgRightProps {
+  currentPage: number;
+  pagesCount: number;
+}
+
+export default function SvgRight({ currentPage, pagesCount }: SvgRightProps) {
   const arrColorDisable = "#D5D6DC";
   const arrColorActive = "#7B7C88";
   return (
