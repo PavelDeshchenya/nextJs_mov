@@ -18,7 +18,7 @@ export default function MoviePage() {
     )
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Error status:", res.status);
+          throw new Error(`Error status: ${res.status}`);
         }
         return res.json();
       })

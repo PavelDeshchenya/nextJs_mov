@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import styles from "./Movies.module.css";
-import { error } from "console";
+
 import MoviesCards from "@/components/MoviesCards/MoviesCards";
 import Pagination from "@/components/Pagination/Pagination";
 
@@ -19,7 +19,7 @@ export default function Movies() {
     fetch(`http://localhost:3000/data/${page}`)
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Error status:", res.status);
+          throw new Error(`Error status: ${res.status}`);
         }
         return res.json();
       })
@@ -29,7 +29,7 @@ export default function Movies() {
     fetch("http://localhost:3000/genres")
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Error status:", res.status);
+          throw new Error(`Error status: ${res.status}`);
         }
         return res.json();
       })
