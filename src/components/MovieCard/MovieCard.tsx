@@ -1,7 +1,17 @@
 import styles from "./MovieCard.module.css";
 import getRate from "@/utils/getRate";
 
-export default function MovieCard({ movie }: any) {
+interface Movie {
+  id: number;
+  poster_path: string;
+  release_date: string;
+  runtime: number;
+  title: string;
+  vote_average: number;
+  vote_count: number;
+}
+
+export default function MovieCard({ movie }: { movie: Movie }) {
   return (
     <div className={styles.moviesContainer}>
       <div className={styles.cardContainer} key={movie.id}>

@@ -1,7 +1,28 @@
 import styles from "./MoviesCards.module.css";
 import getRate from "@/utils/getRate";
 import Link from "next/link";
-export default function MoviesCards({ results, genres }) {
+
+interface Genre {
+  id: number;
+  name: string;
+}
+
+interface Movie {
+  id: number;
+  poster_path: string;
+  title: string;
+  release_date: string;
+  vote_average: number;
+  vote_count: number;
+  genre_ids: number[];
+}
+
+interface Props {
+  results: Movie[];
+  genres: Genre[];
+}
+
+const MoviesCards: React.FC<Props> = ({ results, genres }) => {
   return (
     <div className={styles.moviesContainer}>
       {results.map((result) => (
@@ -40,7 +61,9 @@ export default function MoviesCards({ results, genres }) {
               {result.genre_ids.map((genreId) => {
                 const genre = genres.find((genre) => genre.id === genreId);
                 return genre ? (
-                  <p className={styles.descContainer_GenreList}>{genre.name}</p>
+                  <p key={genre.id} className={styles.descContainer_GenreList}>
+                    {genre.name}
+                  </p>
                 ) : null;
               })}
             </div>
@@ -49,4 +72,6 @@ export default function MoviesCards({ results, genres }) {
       ))}
     </div>
   );
-}
+};
+
+export default MoviesCards;
