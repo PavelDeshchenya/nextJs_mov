@@ -1,0 +1,13 @@
+.header {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 44.8px;
+  margin-top: 41.5px;
+  margin-bottom: 40px;
+}
+
+.mainContainer {
+  width: 84.4%;
+  display: flex;
+  flex-direction: column;
+}

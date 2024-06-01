@@ -17,6 +17,14 @@ const nextConfig = {
       },
     ];
   },
+  // async redirect() {
+  //   return [
+  //     {
+  //       source: "/",
+  //       destination: "/Movies",
+  //     },
+  //   ];
+  // },
 };
 
 export default nextConfig;
