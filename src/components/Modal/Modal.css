@@ -6,3 +6,23 @@
 
 .mantine-Modal-content {
 }
+.mantine-Modal-header {
+  border-bottom: 1px solid #d5d6dc;
+}
+
+.mantine-Modal-title {
+  font-size: 16px;
+  color: #000000;
+  font-weight: 400;
+}
+
+.header_title {
+  font-size: 16px;
+  color: #000000;
+  font-weight: 700;
+  margin: 16px 0px 16px 0px;
+}
+
+.mantine-Rating-root {
+  margin-bottom: 16px;
+}

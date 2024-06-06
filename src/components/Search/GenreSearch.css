@@ -1,0 +1,14 @@
+.mantine-InputWrapper-root {
+  width: 283px;
+  margin-bottom: 60px;
+  margin-right: 16px;
+}
+
+.mantine-Combobox-options {
+}
+
+.mantine-Combobox-dropdown {
+  width: 10px;
+  /* overflow: scroll;
+  height: 200px; */
+}

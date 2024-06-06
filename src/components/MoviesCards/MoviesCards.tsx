@@ -23,10 +23,10 @@ interface Props {
   genres: Genre[];
 }
 
-const MoviesCards: React.FC<Props> = ({ results, genres }) => {
+const MoviesCards = ({ moviesProp, genresProp }: Props) => {
   return (
     <div className={styles.moviesContainer}>
-      {results.map((result) => (
+      {moviesProp.map((result) => (
         <div key={result.id} className={styles.cardContainer}>
           <Link href={`/Movies/${result.id}`}>
             <div className={styles.imgContainer}>
@@ -57,7 +57,9 @@ const MoviesCards: React.FC<Props> = ({ results, genres }) => {
               <div className={styles.descContainer_Genre}>
                 <p className={styles.descContainer_RatingValue_Total}>Genres</p>
                 {result.genre_ids.map((genreId) => {
-                  const genre = genres.find((genre) => genre.id === genreId);
+                  const genre = genresProp.find(
+                    (genre) => genre.id === genreId
+                  );
                   return genre ? (
                     <p
                       key={genre.id}

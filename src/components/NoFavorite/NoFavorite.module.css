@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 251px;
+}
+
+.header {
+  font-weight: 600;
+  font-size: 20px;
+  color: black;
+  margin-bottom: 16px;
+}
+
+.button {
+  font-size: 14px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 600;
+  background-color: #9854f6;
+  padding: 10px 20px 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}

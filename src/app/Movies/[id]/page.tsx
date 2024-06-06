@@ -3,6 +3,7 @@
 import MovieCard from "@/components/MovieCard/MovieCard";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Breadcrumbs, Anchor } from "@mantine/core";
 interface Movie {
   id: number;
   poster_path: string;
@@ -40,5 +41,20 @@ export default function MoviePage() {
       .then((data) => setMovie(data))
       .catch((error) => console.error("Ошибка запроса:", error));
   }, [id]);
-  return <MovieCard movie={movie} />;
+
+  const items = [
+    { title: "Movies", href: "/Movies" },
+    { title: movie.title, href: "#" },
+  ].map((item) => (
+    <Anchor href={item.href} key={movie.id}>
+      {item.title}
+    </Anchor>
+  ));
+
+  return (
+    <>
+      <Breadcrumbs>{items}</Breadcrumbs>
+      <MovieCard movie={movie} />;
+    </>
+  );
 }

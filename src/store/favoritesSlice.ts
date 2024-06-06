@@ -7,11 +7,21 @@ export const favoritesSlice = createSlice({
   },
   reducers: {
     addFavoriteCard(state, action) {
-      state.favoriteCards.push(action.payload);
+      const hasCard = state.favoriteCards.find(
+        (favoriteCard) => favoriteCard.id == action.payload.id
+      );
+      if (!hasCard) {
+        state.favoriteCards.push(action.payload);
+      }
+    },
+    deleteFavoriteCard(state, action) {
+      state.favoriteCards = state.favoriteCards.filter(
+        (favoriteCard) => favoriteCard.id !== action.payload.id
+      );
     },
   },
 });
 
-export const { addFavoriteCard } = favoritesSlice.actions;
+export const { addFavoriteCard, deleteFavoriteCard } = favoritesSlice.actions;
 
 export default favoritesSlice.reducer;

@@ -2,18 +2,26 @@ import { useDisclosure } from "@mantine/hooks";
 import { MantineProvider, Modal, createTheme, px, rem } from "@mantine/core";
 import styles from "./Modal.module.css";
 import "./Modal.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Rating } from "@mantine/core";
 import ModalButton from "../Button/ButtonToModal/ModalButton";
 import StarSvg from "./StarSvg";
-import { useDispatch } from "react-redux";
-import { addFavoriteCard } from "@/store/favoritesSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavoriteCard, deleteFavoriteCard } from "@/store/favoritesSlice";
+
+import { setDisplayRate } from "@/store/displayRateSlice";
 
 export default function Demo({ title, card }) {
   const [opened, { open, close }] = useDisclosure(false);
-  const [value, setValue] = useState(0 || null);
-  const [displayedValue, displayedValueSet] = useState(null);
+  const rates = useSelector((state) => state.displayRate.rates);
   const dispatch = useDispatch();
+  const displayedValue = rates[card.id] || null;
+  const [value, setValue] = useState(displayedValue);
+
+  useEffect(() => {
+    setValue(displayedValue);
+    console.log("Сработал useEffect");
+  }, [displayedValue]);
 
   const theme = createTheme({
     components: {
@@ -26,32 +34,30 @@ export default function Demo({ title, card }) {
     },
   });
 
-  function displayRateValue() {
+  function handleClickSaveButton() {
     close();
-    displayedValueSet(value);
     dispatch(addFavoriteCard(card));
+    dispatch(setDisplayRate({ cardId: card.id, rate: value }));
   }
 
-  function deleteRate() {
-    displayedValueSet(null);
+  function handleClickRemoveButton() {
+    dispatch(setDisplayRate({ cardId: card.id, rate: null }));
     setValue(null);
+    dispatch(deleteFavoriteCard(card));
     close();
   }
 
   return (
     <>
       <MantineProvider theme={theme}>
-        <Modal opened={opened} onClose={close} title="Modal" centered>
-          <h1>Your rating</h1>
-          <p>{title}</p>
-          <Rating
-            value={value}
-            onChange={setValue}
-            count={10}
-            color="#9854F6"
-          />
-          <ModalButton handleclick={displayRateValue}>Save</ModalButton>
-          <ModalButton handleclick={deleteRate}>Remove Rating</ModalButton>
+        <Modal opened={opened} onClose={close} title="Your rating" centered>
+          <h1 className="header_title">{title}</h1>
+
+          <Rating value={value} onChange={setValue} count={10} size="lg" />
+          <ModalButton handleclick={handleClickSaveButton}>Save</ModalButton>
+          <ModalButton handleclick={handleClickRemoveButton}>
+            Remove Rating
+          </ModalButton>
         </Modal>
       </MantineProvider>
 
