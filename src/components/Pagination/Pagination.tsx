@@ -1,19 +1,35 @@
 import { useEffect, useState } from "react";
 import styles from "./Pagination.module.css";
-
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import SvgLeft from "./SvgArrow/SvgLeft";
 import SvgRight from "./SvgArrow/SvgRight";
+
 interface PaginationProps {
   pagesCount: number;
   onPageChange: (page: number) => void;
   currentPage: number;
 }
 
-const Pagination: React.FC<PaginationProps> = ({
+function Pagination({
   pagesCount,
   onPageChange,
   currentPage,
-}) => {
+}: PaginationProps) {
+  function createPageURL(pageNumber: number | string) {
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const { replace } = useRouter();
+
+    const params = new URLSearchParams(searchParams);
+    pageNumber == "1"
+      ? params.set("page", "1")
+      : params.set("page", pageNumber.toString());
+
+    return replace(`${pathname}?${params.toString()}`);
+  }
+
+  createPageURL(currentPage);
+
   const [visiblePages, setVisiblePages] = useState<number[]>([1, 2, 3]);
 
   useEffect(() => {
@@ -57,6 +73,6 @@ const Pagination: React.FC<PaginationProps> = ({
       </button>
     </div>
   );
-};
+}
 
 export default Pagination;

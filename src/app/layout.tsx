@@ -3,12 +3,14 @@
 import type { Metadata } from "next";
 import React from "react";
 import { Inter } from "next/font/google";
+
 import "./globals.css";
 import "@mantine/core/styles.css";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import Navbar from "@/components/Navbar/Navbar";
 import { Provider } from "react-redux";
 import store from "@/store/store";
+import Providers from "@/Context/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,13 +30,15 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body style={{ display: "flex", flexDirection: "row" }}>
-        <Provider store={store}>
-          <MantineProvider>
-            <Navbar />
+        <Providers>
+          <Provider store={store}>
+            <MantineProvider>
+              <Navbar />
 
-            <main>{children}</main>
-          </MantineProvider>
-        </Provider>
+              <main>{children}</main>
+            </MantineProvider>
+          </Provider>
+        </Providers>
       </body>
     </html>
   );

@@ -1,6 +1,6 @@
 import styles from "./Button.module.css";
 
-export default function Button({ children, handleClick, isActive }: any) {
+export default function Button({ children, isActive }: any) {
   return (
     <button
       className={
@@ -8,7 +8,6 @@ export default function Button({ children, handleClick, isActive }: any) {
           ? `${styles.button} ${styles.activeButton}`
           : `${styles.button}`
       }
-      onClick={handleClick}
     >
       {children}
     </button>

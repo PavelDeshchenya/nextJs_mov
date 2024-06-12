@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   genresDate: [],
-  status: "",
+  statusGenre: "",
   error: null,
 };
 

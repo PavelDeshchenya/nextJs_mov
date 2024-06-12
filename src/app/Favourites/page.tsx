@@ -5,29 +5,16 @@ import styles from "./Favourites.module.css";
 import getRate from "@/utils/getRate";
 import Link from "next/link";
 import Demo from "../../components/Modal/Modal";
-import { useEffect, useState } from "react";
+
 import NoFavorite from "@/components/NoFavorite/NoFavorite";
 
 export default function FavouritesPage() {
-  const [genres, setGenres] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:3000/genres")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`Error status: ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((data) => setGenres(data.genres))
-      .catch((error) => console.error("Ошибка запроса:", error));
-  }, []);
+  const { genresDate } = useSelector((state) => state.genreStore);
 
   const { favoriteCards } = useSelector((state) => state.favorites);
 
-  console.log("Lenght favourites", favoriteCards.length);
   return (
     <>
-      {" "}
       {favoriteCards.length == 0 ? (
         <NoFavorite />
       ) : (
@@ -70,7 +57,7 @@ export default function FavouritesPage() {
                         Genres
                       </p>
                       {favoriteCard.genre_ids.map((genreId) => {
-                        const genre = genres.find(
+                        const genre = genresDate.find(
                           (genre) => genre.id === genreId
                         );
                         return genre ? (

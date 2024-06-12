@@ -1,5 +1,9 @@
-export default function getRate(vote_count: number) {
+export default function getRate(vote_count: number | undefined) {
+  if (vote_count == undefined) {
+    return "No data";
+  }
   let vote_countStr = vote_count.toString();
+
   if (vote_countStr.length < 4) {
     return `(${vote_countStr}K)`;
   } else if (vote_countStr.length == 4) {

@@ -27,7 +27,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/api/route.ts",
-    "src/app/Movies/page.jsx"
+    "src/app/Movies/page.jsx",
+    "src/app/Profile"
   ],
   "exclude": ["node_modules"]
 }

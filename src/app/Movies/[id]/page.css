@@ -1,0 +1,17 @@
+.mantine-Breadcrumbs-root {
+  margin-top: 40px;
+  margin-left: 235px;
+}
+
+.mantine-Breadcrumbs-breadcrumb {
+  color: #9854f6;
+  line-height: 20px;
+  font-weight: 400;
+  font-size: 14px;
+}
+.moviePageContainer {
+  width: 100%;
+  background-color: #eaebed;
+  display: flex;
+  flex-direction: column;
+}

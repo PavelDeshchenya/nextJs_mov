@@ -1,7 +1,8 @@
 import styles from "./MovieCard.module.css";
 import getRate from "@/utils/getRate";
+import { MovieCard } from "../../types/types";
 
-interface Movie {
+interface MovieCard {
   id: number;
   poster_path: string;
   release_date: string;
@@ -11,7 +12,7 @@ interface Movie {
   vote_count: number;
 }
 
-export default function MovieCard({ movie }: { movie: Movie }) {
+export default function MovieCard({ movie }: { movie: MovieCard }) {
   return (
     <div className={styles.moviesContainer}>
       <div className={styles.cardContainer} key={movie.id}>
@@ -42,22 +43,33 @@ export default function MovieCard({ movie }: { movie: Movie }) {
               </p>
             </div>
           </div>
-          <div className={styles.descContainer_Genre}>
-            <p className={styles.descContainer_RatingValue_Total}>
-              Duration{" "}
-              {Math.floor(movie.runtime / 60) +
-                "h" +
-                (movie.runtime - Math.floor(movie.runtime / 60) * 60) +
-                "m"}
-            </p>
-            <p className={styles.descContainer_RatingValue_Total}>
-              Premiere {}
-            </p>
-            <p className={styles.descContainer_RatingValue_Total}>Budget {}</p>
-            <p className={styles.descContainer_RatingValue_Total}>
-              Gross worldwide {}
-            </p>
-            <p className={styles.descContainer_RatingValue_Total}>Genres</p>
+          <div className={styles.descContainer_AllParams}>
+            <div className={styles.descContainer_AllParams_keys_container}>
+              <p className={styles.descContainer_AllParams_keys}>Duration</p>
+              <p className={styles.descContainer_AllParams_keys}>Premiere {}</p>
+              <p className={styles.descContainer_AllParams_keys}>Budget {}</p>
+              <p className={styles.descContainer_AllParams_keys}>
+                Gross worldwide
+              </p>
+              <p className={styles.descContainer_AllParams_keys}>Genres</p>
+            </div>
+            <div className={styles.descContainer_AllParams_values_container}>
+              <p className={styles.descContainer_AllParams_values}>
+                Duration
+                {Math.floor(movie.runtime / 60) +
+                  "h" +
+                  (movie.runtime - Math.floor(movie.runtime / 60) * 60) +
+                  "m"}
+              </p>
+              <p className={styles.descContainer_AllParams_values}>
+                Premiere {}
+              </p>
+              <p className={styles.descContainer_AllParams_values}>Budget {}</p>
+              <p className={styles.descContainer_AllParams_values}>
+                Gross worldwide {}
+              </p>
+              <p className={styles.descContainer_AllParams_values}>Genres</p>
+            </div>
           </div>
         </div>
       </div>

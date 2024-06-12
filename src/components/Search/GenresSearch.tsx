@@ -1,6 +1,6 @@
 import "./GenreSearch.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   CheckIcon,
   Combobox,
@@ -14,14 +14,16 @@ import {
 
 const MAX_DISPLAYED_VALUES = 2;
 
-export function GenreSearch({ genres }) {
+export function GenreSearch({ genres, onGenreSelect }) {
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
     onDropdownOpen: () => combobox.updateSelectedOptionIndex("active"),
   });
 
   const [value, setValue] = useState<string[]>([]);
-  console.log(value);
+  useEffect(() => {
+    onGenreSelect(value);
+  }, [value, onGenreSelect]);
 
   const handleValueSelect = (val: string) => {
     setValue((current) =>
@@ -29,7 +31,6 @@ export function GenreSearch({ genres }) {
         ? current.filter((v) => v !== val)
         : [...current, val]
     );
-    sendGenresToParent(value);
   };
 
   const handleValueRemove = (val: string) =>

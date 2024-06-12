@@ -1,18 +1,16 @@
 "use client";
+
 import styles from "./Navbar.module.css";
-// import Link from "next/link";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import Button from "@/components/Button/Button";
-import { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
-  const [active, setActive] = useState(true);
-
   const pathName = usePathname();
-  console.log("pathname", pathName);
+  const session = useSession();
 
   return (
     <div className={styles.container}>
@@ -21,21 +19,33 @@ export default function Navbar() {
       </div>
       <div className={styles.buttonContainer}>
         <Link href="/Movies">
-          <Button
-            isActive={active === true}
-            handleClick={() => setActive(true)}
-          >
+          <Button isActive={pathName.startsWith("/Mov") ? true : false}>
             Movies
           </Button>
         </Link>
         <Link href="/Favourites">
-          <Button
-            isActive={active === false}
-            handleClick={() => setActive(!true)}
-          >
+          <Button isActive={pathName.startsWith("/Fav") ? true : false}>
             Rated movies
           </Button>
         </Link>
+        {session?.data && (
+          <Link href="/Profile">
+            <Button isActive={pathName.startsWith("/Prof") ? true : false}>
+              Profile
+            </Button>
+          </Link>
+        )}
+
+        {session?.data ? (
+          <Link href="#" onClick={() => signOut({ callbackUrl: "/" })}>
+            <Button>Sign out</Button>
+          </Link>
+        ) : (
+          <Link href="/api/auth/signin">
+            {" "}
+            <Button>Sign in</Button>
+          </Link>
+        )}
       </div>
     </div>
   );

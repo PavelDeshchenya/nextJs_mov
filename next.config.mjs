@@ -17,14 +17,15 @@ const nextConfig = {
       },
     ];
   },
-  // async redirect() {
-  //   return [
-  //     {
-  //       source: "/",
-  //       destination: "/Movies",
-  //     },
-  //   ];
-  // },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/Movies",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

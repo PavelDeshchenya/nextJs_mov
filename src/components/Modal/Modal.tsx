@@ -20,7 +20,6 @@ export default function Demo({ title, card }) {
 
   useEffect(() => {
     setValue(displayedValue);
-    console.log("Сработал useEffect");
   }, [displayedValue]);
 
   const theme = createTheme({

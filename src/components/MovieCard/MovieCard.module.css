@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 80px;
+  margin-top: 20px;
   flex-wrap: wrap;
 }
 
@@ -80,20 +80,35 @@
   margin-right: 8px;
 }
 
-.descContainer_Genre {
+.descContainer_AllParams {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   align-items: start;
 }
+.descContainer_AllParams_keys_container {
+  color: #7b7c88;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  margin-right: 20px;
+}
 
-.descContainer_GenreList {
+.descContainer_AllParams_keys:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.descContainer_GenreList:not(:last-child)::after {
+  content: ",  ";
+}
+
+.descContainer_AllParams_values_container {
   color: #000000;
   font-size: 16px;
   line-height: 20px;
   font-weight: 400;
 }
 
-.descContainer_GenreList:not(:last-child)::after {
-  content: ",  ";
+.descContainer_AllParams_values:not(:last-child) {
+  margin-bottom: 12px;
 }

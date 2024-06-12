@@ -1,22 +1,13 @@
 "use client";
-
+import "./page.css";
 import MovieCard from "@/components/MovieCard/MovieCard";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Breadcrumbs, Anchor } from "@mantine/core";
-interface Movie {
-  id: number;
-  poster_path: string;
-  release_date: string;
-  runtime: number;
-  title: string;
-  vote_average: number;
-  vote_count: number;
-  original_title: string;
-}
+import { IMovieCard } from "../../../types/types";
+import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 
 export default function MoviePage() {
-  const [movie, setMovie] = useState<Movie>({
+  const [movie, setMovie] = useState<IMovieCard>({
     id: 0,
     poster_path: "",
     release_date: "",
@@ -25,12 +16,13 @@ export default function MoviePage() {
     vote_average: 0,
     vote_count: 0,
     original_title: "",
+    videos: { results: [] },
   });
   const { id } = useParams();
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${id}?language=en-US&api_key=73bf6ad449b51045f638302f46490a79`
+      `https://api.themoviedb.org/3/movie/${id}?language=en-US&api_key=73bf6ad449b51045f638302f46490a79&append_to_response=videos`
     )
       .then((res) => {
         if (!res.ok) {
@@ -42,19 +34,27 @@ export default function MoviePage() {
       .catch((error) => console.error("Ошибка запроса:", error));
   }, [id]);
 
-  const items = [
-    { title: "Movies", href: "/Movies" },
-    { title: movie.title, href: "#" },
-  ].map((item) => (
-    <Anchor href={item.href} key={movie.id}>
-      {item.title}
-    </Anchor>
-  ));
+  const videoKey =
+    movie.videos.results.length > 0 ? movie.videos.results[1].key : null;
+
+  console.log("movie", videoKey);
 
   return (
     <>
-      <Breadcrumbs>{items}</Breadcrumbs>
-      <MovieCard movie={movie} />;
+      <div className="moviePageContainer">
+        <BreadCrumbs movieTitle={movie.title} movieId={movie.id} />
+        <MovieCard movie={movie} />
+        {/* {videoKey ? (
+          <video
+            src={`https://www.youtube.com/watch?v=${videoKey}`}
+            controls
+            width={500}
+            height={281}
+          />
+        ) : (
+          <p>No video available</p>
+        )} */}
+      </div>
     </>
   );
 }

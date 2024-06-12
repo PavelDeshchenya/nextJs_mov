@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import {
   CheckIcon,
   Combobox,
@@ -18,7 +19,7 @@ for (let i = 2024; i > 1800; i--) {
   numbers.push(i.toString());
 }
 
-export function YearSerch() {
+export function YearSerch({ onYearSelect }) {
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
     onDropdownOpen: () => combobox.updateSelectedOptionIndex("active"),
@@ -26,12 +27,17 @@ export function YearSerch() {
 
   const [value, setValue] = useState<string[]>([]);
 
-  const handleValueSelect = (val: string) =>
+  useEffect(() => {
+    onYearSelect(value);
+  }, [value, onYearSelect]);
+
+  const handleValueSelect = (val: string) => {
     setValue((current) =>
       current.includes(val)
         ? current.filter((v) => v !== val)
         : [...current, val]
     );
+  };
 
   const handleValueRemove = (val: string) =>
     setValue((current) => current.filter((v) => v !== val));
