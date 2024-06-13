@@ -18,6 +18,7 @@ export interface IMoviesCardProps {
   genres: IGenreMovieCard[];
 }
 export interface IMovieCard {
+  videos: any;
   id: number;
   poster_path: string;
   release_date: string;
@@ -26,4 +27,10 @@ export interface IMovieCard {
   vote_average: number;
   vote_count: number;
   original_title: string;
+}
+
+export interface PaginationProps {
+  pagesCount: number;
+  onPageChange: (page: number) => void;
+  currentPage: number;
 }

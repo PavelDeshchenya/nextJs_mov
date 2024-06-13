@@ -3,12 +3,7 @@ import styles from "./Pagination.module.css";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import SvgLeft from "./SvgArrow/SvgLeft";
 import SvgRight from "./SvgArrow/SvgRight";
-
-interface PaginationProps {
-  pagesCount: number;
-  onPageChange: (page: number) => void;
-  currentPage: number;
-}
+import { PaginationProps } from "../../types/types";
 
 function Pagination({
   pagesCount,

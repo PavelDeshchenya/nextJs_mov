@@ -1,6 +1,7 @@
 import { Input } from "@mantine/core";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 function InputSearch({ passValue }) {
   const searchParams = useSearchParams();
@@ -8,7 +9,7 @@ function InputSearch({ passValue }) {
   const pathname = usePathname();
   const router = useRouter();
 
-  function handleSearch(term) {
+  const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
 
     if (term) {
@@ -18,7 +19,7 @@ function InputSearch({ passValue }) {
     }
 
     router.replace(`${pathname}?${params.toString()}`);
-  }
+  }, 300);
 
   const queryInput = searchParams.get("query")?.toString() || "";
 
