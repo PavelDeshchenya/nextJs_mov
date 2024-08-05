@@ -1,24 +1,22 @@
 import styles from "./MovieCard.module.css";
 import getRate from "@/utils/getRate";
-import { MovieCard } from "../../types/types";
+import { IMovieCard } from "@/types/types";
+import { getRunTime, getDate, getBudget } from "@/utils/getFormatted";
+import ModalWindow from "../Modal/Modal";
+import Image from "next/image";
 
-interface MovieCard {
-  id: number;
-  poster_path: string;
-  release_date: string;
-  runtime: number;
-  title: string;
-  vote_average: number;
-  vote_count: number;
-}
+export default function MovieCard({ movie }: { movie: IMovieCard }) {
+  const runtime = getRunTime(movie.runtime);
+  const formattedDate = getDate(movie.release_date);
+  const formattedBudget = getBudget(movie.budget);
+  const formatedRevenue = getBudget(movie.revenue);
 
-export default function MovieCard({ movie }: { movie: MovieCard }) {
   return (
     <div className={styles.moviesContainer}>
       <div className={styles.cardContainer} key={movie.id}>
         <div className={styles.imgContainer}>
-          <img
-            className={styles.img}
+          <Image
+            fill={true}
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={movie.title}
           />
@@ -30,7 +28,7 @@ export default function MovieCard({ movie }: { movie: MovieCard }) {
           </p>
           <div className={styles.descContainer_Rating}>
             <div className={styles.descContainer_RatingImgContainer}>
-              <img src="/star.svg" alt="star" />
+              <Image src="/star.svg" alt="star" width={28} height={28} />
             </div>
             <div className={styles.descContainer_RatingValue}>
               <p className={styles.descContainer_RatingValue_Average}>
@@ -54,23 +52,33 @@ export default function MovieCard({ movie }: { movie: MovieCard }) {
               <p className={styles.descContainer_AllParams_keys}>Genres</p>
             </div>
             <div className={styles.descContainer_AllParams_values_container}>
+              <p className={styles.descContainer_AllParams_values}>{runtime}</p>
               <p className={styles.descContainer_AllParams_values}>
-                Duration
-                {Math.floor(movie.runtime / 60) +
-                  "h" +
-                  (movie.runtime - Math.floor(movie.runtime / 60) * 60) +
-                  "m"}
+                {formattedDate}
               </p>
               <p className={styles.descContainer_AllParams_values}>
-                Premiere {}
+                {formattedBudget}
               </p>
-              <p className={styles.descContainer_AllParams_values}>Budget {}</p>
               <p className={styles.descContainer_AllParams_values}>
-                Gross worldwide {}
+                {formatedRevenue}
               </p>
-              <p className={styles.descContainer_AllParams_values}>Genres</p>
+              <p className={styles.descContainer_AllParams_values}>
+                {movie.genres && movie.genres.length > 0
+                  ? movie.genres.map((genre: { id: number; name: string }) => (
+                      <span
+                        key={genre.id}
+                        className={styles.descContainer_AllParams_genres}
+                      >
+                        {genre.name}
+                      </span>
+                    ))
+                  : "No genres available"}
+              </p>
             </div>
           </div>
+        </div>
+        <div className={styles.starRate}>
+          <ModalWindow title={movie.title} moviesProp={movie} />
         </div>
       </div>
     </div>

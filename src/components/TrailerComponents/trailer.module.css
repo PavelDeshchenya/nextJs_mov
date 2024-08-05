@@ -1,0 +1,65 @@
+.trailerContainer {
+  background-color: white;
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  padding-left: 24px;
+  padding-top: 24px;
+  padding-right: 24px;
+}
+
+.trailerContainer_headers {
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 16px;
+}
+
+.trailerContainer_divider {
+  height: 1px;
+  width: 100%;
+  background-color: #d5d6dc;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.trailerContainer_descr {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22.4px;
+  width: calc((725 / 800) * 100%);
+}
+
+.trailerContainer_productions {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.trailerContainer_productions_imgTitle {
+  display: flex;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.trailerContainer_productions_img {
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.trailerContainer_productions_imgPic {
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 39.5px;
+  border: 0.5px solid #f1f1f1;
+}
+.trailerContainer_productions_Title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22.4px;
+  color: #000000;
+  margin-left: 8px;
+}

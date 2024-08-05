@@ -1,6 +1,6 @@
 .mantine-Breadcrumbs-root {
   margin-top: 40px;
-  margin-left: 235px;
+  align-self: self-start;
 }
 
 .mantine-Breadcrumbs-breadcrumb {
@@ -14,4 +14,14 @@
   background-color: #eaebed;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.moviePageContainer__Content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: calc(800 / 1160 * 100%);
 }

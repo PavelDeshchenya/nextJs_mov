@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
-        <Image src="logo2.svg" alt="logo" fill={true} />
+        <Image src="/logo2.svg" alt="logo" fill={true} />
       </div>
       <div className={styles.buttonContainer}>
         <Link href="/Movies">

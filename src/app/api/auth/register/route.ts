@@ -1,11 +1,18 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export default async function POST(request: Request) {
+interface ICred {
+  email: string;
+  password: string;
+  username: string;
+}
+
+export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const { email, password, username } = await request.json();
+    const { email, password, username }: ICred = await request.json();
     console.log({ email, password, username });
   } catch (e) {
-    console.log({ e });
+    console.error("Error parsing request:", e);
+    return NextResponse.json({ message: "Error occurred" }, { status: 400 });
   }
 
   return NextResponse.json({ message: "Success" });

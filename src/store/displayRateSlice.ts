@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IRates } from "@/types/types";
 
 export const displayRateSlice = createSlice({
   name: "displayRate",
@@ -6,7 +7,13 @@ export const displayRateSlice = createSlice({
     rates: {},
   },
   reducers: {
-    setDisplayRate(state, action) {
+    setDisplayRate(
+      state: { rates: IRates },
+      action: {
+        type: string;
+        payload: { cardId: number; rate: number | undefined };
+      }
+    ) {
       const { cardId, rate } = action.payload;
       state.rates[cardId] = rate;
     },

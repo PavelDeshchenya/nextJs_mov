@@ -3,7 +3,11 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-function InputSearch({ passValue }) {
+function InputSearch({
+  passValue,
+}: {
+  passValue: (inputValue: string) => void;
+}) {
   const searchParams = useSearchParams();
 
   const pathname = usePathname();

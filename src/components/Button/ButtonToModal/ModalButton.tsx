@@ -1,6 +1,10 @@
 import styles from "./ModalButtom.module.css";
+import { IModalButtonProps } from "@/types/types";
 
-export default function ModalButton({ children, handleclick }) {
+export default function ModalButton({
+  children,
+  handleclick,
+}: IModalButtonProps) {
   return (
     <>
       <button

@@ -6,6 +6,16 @@
   margin-bottom: 40px;
 }
 
+.headerAndInput {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 16px);
+}
+.moviesContainerAllCards {
+  display: flex;
+  flex-wrap: wrap;
+}
 .mainContainer {
   width: 84.4%;
   display: flex;
@@ -39,12 +49,7 @@
   min-width: 118px;
   height: 170px;
   margin-right: 16px;
-}
-
-.img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  position: relative;
 }
 
 .descContainer {
@@ -75,9 +80,9 @@
 }
 
 .descContainer_RatingImgContainer {
+  width: 28px;
   height: 28px;
-}
-.descContainer_RatingImgContainer img {
+  position: relative;
 }
 
 .descContainer_RatingValue {

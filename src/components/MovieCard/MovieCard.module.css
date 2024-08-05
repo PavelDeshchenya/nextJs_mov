@@ -1,30 +1,25 @@
 .moviesContainer {
   width: 100%;
   display: flex;
-  justify-content: center;
+
   margin-top: 20px;
-  flex-wrap: wrap;
 }
 
 .cardContainer {
-  width: 69%;
+  width: 100%;
   display: flex;
   padding: 24px;
   background-color: #ffffff;
   border-radius: 12px;
   box-sizing: border-box;
+  position: relative;
 }
 
 .imgContainer {
   min-width: 250px;
   height: 352px;
   margin-right: 16px;
-}
-
-.img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  position: relative;
 }
 
 .descContainer {
@@ -54,9 +49,9 @@
 }
 
 .descContainer_RatingImgContainer {
+  width: 28px;
   height: 28px;
-}
-.descContainer_RatingImgContainer img {
+  position: relative;
 }
 
 .descContainer_RatingValue {
@@ -84,7 +79,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: start;
+  align-items: flex-start;
 }
 .descContainer_AllParams_keys_container {
   color: #7b7c88;
@@ -98,17 +93,23 @@
   margin-bottom: 12px;
 }
 
-.descContainer_GenreList:not(:last-child)::after {
-  content: ",  ";
-}
-
 .descContainer_AllParams_values_container {
   color: #000000;
   font-size: 16px;
   line-height: 20px;
   font-weight: 400;
+  max-width: 310px;
 }
 
 .descContainer_AllParams_values:not(:last-child) {
   margin-bottom: 12px;
+}
+
+.descContainer_AllParams_genres:not(:last-child)::after {
+  content: ",  ";
+}
+
+.starRate {
+  position: absolute;
+  right: 24px;
 }

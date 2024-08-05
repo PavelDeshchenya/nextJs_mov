@@ -1,8 +1,10 @@
 import styles from "./MoviesCards.module.css";
 import getRate from "@/utils/getRate";
 import Link from "next/link";
-import Demo from "../Modal/Modal";
 import { IMoviesCardProps } from "../../types/types";
+import Image from "next/image";
+
+import ModalWindow from "../Modal/Modal";
 
 const MoviesCards = ({ moviesProp, genresProp }: IMoviesCardProps) => {
   return (
@@ -11,10 +13,10 @@ const MoviesCards = ({ moviesProp, genresProp }: IMoviesCardProps) => {
         <div key={index} className={styles.cardContainer}>
           <Link href={`/Movies/${result.id}`}>
             <div className={styles.imgContainer}>
-              <img
-                className={styles.img}
+              <Image
                 src={`https://image.tmdb.org/t/p/w500${result.poster_path}`}
                 alt={result.title}
+                fill={true}
               />
             </div>
             <div className={styles.descContainer}>
@@ -26,13 +28,11 @@ const MoviesCards = ({ moviesProp, genresProp }: IMoviesCardProps) => {
               </p>
               <div className={styles.descContainer_Rating}>
                 <div className={styles.descContainer_RatingImgContainer}>
-                  <img src="/star.svg" alt="star" />
+                  <Image src="/star.svg" alt="star" width={28} height={28} />
                 </div>
                 <div className={styles.descContainer_RatingValue}>
                   <p className={styles.descContainer_RatingValue_Average}>
-                    {result.vote_average
-                      ? result.vote_average.toFixed(1)
-                      : "No vote"}
+                    {result.vote_average ? result.vote_average.toFixed(1) : 0}
                   </p>
                   <p className={styles.descContainer_RatingValue_Total}>
                     {getRate(result.vote_count)
@@ -62,7 +62,7 @@ const MoviesCards = ({ moviesProp, genresProp }: IMoviesCardProps) => {
             </div>
           </Link>
           <div className={styles.starRate}>
-            <Demo title={result.title} card={result}></Demo>
+            <ModalWindow title={result.title} moviesProp={result} />
           </div>
         </div>
       ))}

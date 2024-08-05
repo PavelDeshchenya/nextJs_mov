@@ -1,3 +1,4 @@
+import "./GenreSearch.css";
 import { useState } from "react";
 import {
   CheckIcon,
@@ -7,6 +8,7 @@ import {
   InputBase,
   useCombobox,
 } from "@mantine/core";
+import Image from "next/image";
 
 const sortingList = [
   "popularity.asc",
@@ -23,10 +25,20 @@ const sortingList = [
   "vote_count.desc",
 ];
 
-export function SortingSelect({ handlePuttingSelecteValue, displayedValue }) {
+export function SortingSelect({
+  handlePuttingSelecteValue,
+  displayedValue,
+}: {
+  handlePuttingSelecteValue: (selectSortValue: string) => void;
+  displayedValue: string | null;
+}) {
+  const [arrow, setArrow] = useState(false);
   const combobox = useCombobox({
-    onDropdownClose: () => combobox.resetSelectedOption(),
+    onDropdownClose: () => {
+      combobox.resetSelectedOption(), setArrow(false);
+    },
     onDropdownOpen: (eventSource) => {
+      setArrow(true);
       if (eventSource === "keyboard") {
         combobox.selectActiveOption();
       } else {
@@ -60,10 +72,18 @@ export function SortingSelect({ handlePuttingSelecteValue, displayedValue }) {
     >
       <Combobox.Target targetType="button">
         <InputBase
+          label="Sort by"
           component="button"
           type="button"
           pointer
-          rightSection={<Combobox.Chevron />}
+          rightSection={
+            <Image
+              src={arrow === false ? "Down.svg" : "UpArrow.svg"}
+              alt="arrDown"
+              width={14}
+              height={6}
+            />
+          }
           rightSectionPointerEvents="none"
           onClick={() => combobox.toggleDropdown()}
         >

@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-
+import { useCallback, useEffect, useState } from "react";
+import Image from "next/image";
+import "./GenreSearch.css";
 import {
   CheckIcon,
   Combobox,
@@ -19,28 +20,43 @@ for (let i = 2024; i > 1800; i--) {
   numbers.push(i.toString());
 }
 
-export function YearSerch({ onYearSelect }) {
+export function YearSerch({
+  onYearSelect,
+  selectedYears,
+}: {
+  onYearSelect: (years: string[]) => void;
+  selectedYears: string[];
+}) {
+  const [arrow, setArrow] = useState(false);
   const combobox = useCombobox({
-    onDropdownClose: () => combobox.resetSelectedOption(),
-    onDropdownOpen: () => combobox.updateSelectedOptionIndex("active"),
+    onDropdownClose: () => {
+      combobox.resetSelectedOption(), setArrow(false);
+    },
+    onDropdownOpen: () => {
+      combobox.updateSelectedOptionIndex("active"), setArrow(true);
+    },
   });
 
-  const [value, setValue] = useState<string[]>([]);
+  const [value, setValue] = useState(selectedYears);
 
   useEffect(() => {
-    onYearSelect(value);
-  }, [value, onYearSelect]);
+    if (value !== selectedYears) {
+      onYearSelect(value);
+    }
+  }, [value, onYearSelect, selectedYears]);
 
-  const handleValueSelect = (val: string) => {
+  const handleValueSelect = useCallback((val: string) => {
     setValue((current) =>
       current.includes(val)
         ? current.filter((v) => v !== val)
         : [...current, val]
     );
-  };
+  }, []);
 
-  const handleValueRemove = (val: string) =>
-    setValue((current) => current.filter((v) => v !== val));
+  const handleValueRemove = useCallback(
+    (val: string) => setValue((current) => current.filter((v) => v !== val)),
+    []
+  );
 
   const values = value
     .slice(
@@ -75,7 +91,11 @@ export function YearSerch({ onYearSelect }) {
       withinPortal={false}
     >
       <Combobox.DropdownTarget>
-        <PillsInput pointer onClick={() => combobox.toggleDropdown()}>
+        <PillsInput
+          pointer
+          onClick={() => combobox.toggleDropdown()}
+          label="Release year"
+        >
           <Pill.Group>
             {value.length > 0 ? (
               <>
@@ -101,6 +121,12 @@ export function YearSerch({ onYearSelect }) {
               />
             </Combobox.EventsTarget>
           </Pill.Group>
+          <Image
+            src={arrow === false ? "Down.svg" : "UpArrow.svg"}
+            alt="arrDown"
+            width={14}
+            height={6}
+          />
         </PillsInput>
       </Combobox.DropdownTarget>
 

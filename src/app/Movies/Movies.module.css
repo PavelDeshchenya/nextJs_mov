@@ -13,4 +13,29 @@
 }
 .searchContainer {
   display: flex;
+  align-items: flex-end;
+}
+
+.buttonReset {
+  width: 81px;
+  height: 36px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #7b7c88;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: #9854f6;
+}
+
+.buttonReset:disabled {
+  color: #7b7c88;
+  cursor: not-allowed;
+}
+
+.sortingContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 0px;
 }

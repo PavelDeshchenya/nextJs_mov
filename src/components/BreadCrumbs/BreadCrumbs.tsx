@@ -1,12 +1,20 @@
 import { Breadcrumbs, Anchor } from "@mantine/core";
-export default function BreadCrumbs({ movieTitle, movieId }) {
+import Link from "next/link";
+
+export default function BreadCrumbs({
+  movieTitle,
+  movieId,
+}: {
+  movieTitle: string;
+  movieId: number;
+}) {
   const items = [
     { title: "Movies", href: "/Movies" },
     { title: movieTitle, href: "#" },
   ].map((item) => (
-    <Anchor href={item.href} key={movieId}>
+    <Link href={item.href} key={movieId}>
       {item.title}
-    </Anchor>
+    </Link>
   ));
   return <Breadcrumbs>{items}</Breadcrumbs>;
 }

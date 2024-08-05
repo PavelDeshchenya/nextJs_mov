@@ -2,6 +2,12 @@ import type { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
 export const authConfig: AuthOptions = {
   providers: [
     GoogleProvider({
@@ -14,7 +20,16 @@ export const authConfig: AuthOptions = {
         password: { label: "password", type: "password", required: true },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials.password) return null;
+        if (!credentials?.email || !credentials.password) {
+          return null;
+        }
+        const user: User = {
+          id: credentials.email,
+          name: credentials.email,
+          email: credentials.email,
+        };
+
+        return user;
       },
     }),
   ],

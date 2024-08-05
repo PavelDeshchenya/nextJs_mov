@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   genresDate: [],
-  statusGenre: "",
-  error: null,
+  statusGenre: null as null | "pending" | "fulfilled" | "error",
+  error: null as null | string,
 };
 
 export const getGenres = createAsyncThunk("genres/getGenres", async () => {
@@ -19,14 +19,14 @@ const getGenreSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(getGenres.pending, (state) => {
-        state.status = "pending";
+        state.statusGenre = "pending";
       })
       .addCase(getGenres.fulfilled, (state, action) => {
-        state.status = "fulfilled";
+        state.statusGenre = "fulfilled";
         state.genresDate = action.payload.genres;
       })
       .addCase(getGenres.rejected, (state, action) => {
-        state.status = "error";
+        state.statusGenre = "error";
         state.error = action.error as unknown as null;
       });
   },

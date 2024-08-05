@@ -1,6 +1,8 @@
 import "./GenreSearch.css";
+import { IGenreSearch } from "@/types/types";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import {
   CheckIcon,
   Combobox,
@@ -14,27 +16,40 @@ import {
 
 const MAX_DISPLAYED_VALUES = 2;
 
-export function GenreSearch({ genres, onGenreSelect }) {
-  const combobox = useCombobox({
-    onDropdownClose: () => combobox.resetSelectedOption(),
-    onDropdownOpen: () => combobox.updateSelectedOptionIndex("active"),
-  });
+export function GenreSearch({
+  genres,
+  onGenreSelect,
+  selectedGenres,
+}: IGenreSearch) {
+  const [value, setValue] = useState(selectedGenres);
+  const [arrow, setArrow] = useState(false);
 
-  const [value, setValue] = useState<string[]>([]);
-  useEffect(() => {
-    onGenreSelect(value);
-  }, [value, onGenreSelect]);
-
-  const handleValueSelect = (val: string) => {
+  const handleValueSelect = useCallback((val: string) => {
     setValue((current) =>
       current.includes(val)
         ? current.filter((v) => v !== val)
         : [...current, val]
     );
-  };
+  }, []);
 
-  const handleValueRemove = (val: string) =>
+  const handleValueRemove = useCallback((val: string) => {
     setValue((current) => current.filter((v) => v !== val));
+  }, []);
+
+  useEffect(() => {
+    if (value !== selectedGenres) {
+      onGenreSelect(value);
+    }
+  }, [value, onGenreSelect, selectedGenres]);
+
+  const combobox = useCombobox({
+    onDropdownClose: () => {
+      combobox.resetSelectedOption(), setArrow(false);
+    },
+    onDropdownOpen: () => {
+      combobox.updateSelectedOptionIndex("active"), setArrow(true);
+    },
+  });
 
   const values = value
     .slice(
@@ -73,7 +88,11 @@ export function GenreSearch({ genres, onGenreSelect }) {
       withinPortal={false}
     >
       <Combobox.DropdownTarget>
-        <PillsInput pointer onClick={() => combobox.toggleDropdown()}>
+        <PillsInput
+          pointer
+          onClick={() => combobox.toggleDropdown()}
+          label="Genres"
+        >
           <Pill.Group>
             {value.length > 0 ? (
               <>
@@ -100,6 +119,13 @@ export function GenreSearch({ genres, onGenreSelect }) {
               />
             </Combobox.EventsTarget>
           </Pill.Group>
+
+          <Image
+            src={arrow === false ? "Down.svg" : "UpArrow.svg"}
+            alt="arrDown"
+            width={14}
+            height={6}
+          />
         </PillsInput>
       </Combobox.DropdownTarget>
 

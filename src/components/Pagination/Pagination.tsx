@@ -10,7 +10,7 @@ function Pagination({
   onPageChange,
   currentPage,
 }: PaginationProps) {
-  function createPageURL(pageNumber: number | string) {
+  function CreatePageURL(pageNumber: number | string) {
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const { replace } = useRouter();
@@ -23,7 +23,7 @@ function Pagination({
     return replace(`${pathname}?${params.toString()}`);
   }
 
-  createPageURL(currentPage);
+  CreatePageURL(currentPage);
 
   const [visiblePages, setVisiblePages] = useState<number[]>([1, 2, 3]);
 
