@@ -24,10 +24,6 @@ export default function Movies() {
     valueTo: "",
   });
 
-  console.log("ye", filters.years);
-  console.log("genr", filters.genresInSelect);
-  console.log("vt", filters.valueFrom);
-
   function checkResetButton(filters: IFilters) {
     if (
       filters.years.length === 0 &&

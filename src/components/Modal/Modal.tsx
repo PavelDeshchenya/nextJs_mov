@@ -16,7 +16,7 @@ export default function ModalWindow({ title, moviesProp }: IModalWindow) {
   const { rates } = useSelector(
     (state) => state as { displayRate: { rates: IRates } }
   ).displayRate;
-  console.log("rate", rates);
+
   const dispatch = useDispatch();
   const displayedValue = rates[moviesProp.id] || undefined;
   const [value, setValue] = useState(displayedValue);
