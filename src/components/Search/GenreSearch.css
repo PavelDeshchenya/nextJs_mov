@@ -22,15 +22,15 @@
 }
 
 .mantine-PillsInput-input {
-  display: flex;
+  display: flex !important;
   justify-content: space-between;
   align-items: center;
 }
 
 .m_8fb7ebe7 {
-  display: flex;
+  display: flex !important;
 }
 
 .m_8fb7ebe7.flex {
-  display: flex;
+  display: flex !important;
 }
