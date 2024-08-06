@@ -9,6 +9,8 @@ import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 import TrailerComponent from "@/components/TrailerComponents/TrailerComponents";
 import Loading from "@/app/loading";
 
+const apiKey = process.env.NEXT_PUBLIC_DATA_API_KEY;
+
 export default function MoviePage() {
   const [movie, setMovie] = useState<IMovieCard>({
     videos: { results: [] },
@@ -29,7 +31,11 @@ export default function MoviePage() {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/movie/${id}`)
+    const apiURL =
+      process.env.NODE_ENV === "development"
+        ? `http://localhost:3000/movie/${id}`
+        : `https://api.themoviedb.org/3/movie/${id}?language=en-US&api_key=${apiKey}&append_to_response=videos`;
+    fetch(apiURL)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Error status: ${res.status}`);

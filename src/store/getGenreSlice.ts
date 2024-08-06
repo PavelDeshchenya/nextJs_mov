@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+const apiKey = process.env.NEXT_PUBLIC_DATA_API_KEY;
+
 const initialState = {
   genresDate: [],
   statusGenre: null as null | "pending" | "fulfilled" | "error",
@@ -7,7 +9,11 @@ const initialState = {
 };
 
 export const getGenres = createAsyncThunk("genres/getGenres", async () => {
-  const response = await fetch("http://localhost:3000/genres");
+  const apiURL =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000/genres"
+      : `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en`;
+  const response = await fetch(apiURL);
   const data = await response.json();
   return data;
 });

@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
-const apiKey = process.env.DATA_API_KEY;
+
+const apiKey = process.env.NEXT_PUBLIC_DATA_API_KEY;
+
 const nextConfig = {
   async rewrites() {
     return [
@@ -41,6 +43,9 @@ const nextConfig = {
         pathname: "/t/p/w500/**",
       },
     ],
+  },
+  env: {
+    apiKey: process.env.DATA_API_KEY,
   },
 };
 

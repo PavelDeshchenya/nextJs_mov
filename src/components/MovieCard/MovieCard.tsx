@@ -4,6 +4,7 @@ import { IMovieCard } from "@/types/types";
 import { getRunTime, getDate, getBudget } from "@/utils/getFormatted";
 import ModalWindow from "../Modal/Modal";
 import Image from "next/image";
+import { v4 as uuidv4 } from "uuid";
 
 export default function MovieCard({ movie }: { movie: IMovieCard }) {
   const runtime = getRunTime(movie.runtime);
@@ -17,14 +18,18 @@ export default function MovieCard({ movie }: { movie: IMovieCard }) {
         <div className={styles.imgContainer}>
           <Image
             fill={true}
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            src={
+              movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                : "No photo"
+            }
             alt={movie.title}
           />
         </div>
         <div className={styles.descContainer}>
           <h1 className={styles.descContainer_Title}>{movie.title}</h1>
           <p className={styles.descContainer_Year}>
-            {movie.release_date.slice(0, 4)}
+            {movie.release_date ? movie.release_date.slice(0, 4) : "No data"}
           </p>
           <div className={styles.descContainer_Rating}>
             <div className={styles.descContainer_RatingImgContainer}>
@@ -52,21 +57,23 @@ export default function MovieCard({ movie }: { movie: IMovieCard }) {
               <p className={styles.descContainer_AllParams_keys}>Genres</p>
             </div>
             <div className={styles.descContainer_AllParams_values_container}>
-              <p className={styles.descContainer_AllParams_values}>{runtime}</p>
               <p className={styles.descContainer_AllParams_values}>
-                {formattedDate}
+                {runtime ? runtime : "No data"}
               </p>
               <p className={styles.descContainer_AllParams_values}>
-                {formattedBudget}
+                {formattedDate ? formattedDate : "No data"}
               </p>
               <p className={styles.descContainer_AllParams_values}>
-                {formatedRevenue}
+                {formattedBudget ? formattedBudget : "No data"}
               </p>
               <p className={styles.descContainer_AllParams_values}>
-                {movie.genres && movie.genres.length > 0
+                {formatedRevenue ? formatedRevenue : "No data"}
+              </p>
+              <p className={styles.descContainer_AllParams_values}>
+                {movie.genres != undefined && movie.genres.length > 0
                   ? movie.genres.map((genre: { id: number; name: string }) => (
                       <span
-                        key={genre.id}
+                        key={uuidv4()}
                         className={styles.descContainer_AllParams_genres}
                       >
                         {genre.name}

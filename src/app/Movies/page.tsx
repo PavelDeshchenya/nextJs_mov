@@ -130,6 +130,7 @@ export default function Movies() {
       return matchGenres && matchYear && matchRatingsFrom && matchRatingsTo;
     });
   }
+  console.log("produc", process.env.NODE_ENV);
 
   return (
     <>

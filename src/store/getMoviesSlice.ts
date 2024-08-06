@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { IMovieCards } from "@/types/types";
-
+const apiKey = process.env.NEXT_PUBLIC_DATA_API_KEY;
 interface IinitialState {
   AllmoviesDate: IMovieCards[];
   SingleMoviesDate: IMovieCards[];
@@ -24,9 +24,11 @@ const initialState: IinitialState = {
 };
 
 const fetchMovies = async (sorting: string, page = 1) => {
-  const response = await fetch(
-    `http://localhost:3000/movies/${page}/${sorting}`
-  );
+  const apiURL =
+    process.env.NODE_ENV === "development"
+      ? `http://localhost:3000/movies/${page}/${sorting}`
+      : `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=${sorting}`;
+  const response = await fetch(apiURL);
   const data = await response.json();
 
   return data;

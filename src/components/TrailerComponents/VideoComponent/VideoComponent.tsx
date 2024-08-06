@@ -5,12 +5,21 @@ export default async function VideoComponent({ movie }: { movie: IMovieCard }) {
     const trailerIndex = movie.videos.results.findIndex(
       (item) => item["type"] == "Trailer"
     );
+    if (trailerIndex === -1) {
+      throw new Error("Trailer not found");
+    }
     const videoKey = movie.videos.results[trailerIndex]["key"];
     const url = `https://www.youtube.com/embed/${videoKey}`;
     return url;
   }
 
-  const src = await getVideoSrc();
+  let src;
+  try {
+    src = await getVideoSrc();
+  } catch (error) {
+    console.error(error);
+    src = "";
+  }
 
   return (
     <iframe
