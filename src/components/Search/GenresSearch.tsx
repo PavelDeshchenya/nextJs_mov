@@ -68,18 +68,23 @@ export function GenreSearch({
       </Pill>
     ));
 
-  const options = genres.map((item) => (
-    <Combobox.Option
-      value={item.name}
-      key={item.id}
-      active={value.includes(item.name)}
-    >
-      <Group gap="sm">
-        {value.includes(item.name) ? <CheckIcon size={12} /> : null}
-        <span>{item.name}</span>
-      </Group>
-    </Combobox.Option>
-  ));
+  const options =
+    genres.length > 0 ? (
+      genres.map((item) => (
+        <Combobox.Option
+          value={item.name}
+          key={item.id}
+          active={value.includes(item.name)}
+        >
+          <Group gap="sm">
+            {value.includes(item.name) ? <CheckIcon size={12} /> : null}
+            <span>{item.name}</span>
+          </Group>
+        </Combobox.Option>
+      ))
+    ) : (
+      <div>No genres available</div>
+    );
 
   return (
     <Combobox
