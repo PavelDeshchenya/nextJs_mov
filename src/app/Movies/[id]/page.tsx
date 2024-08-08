@@ -32,9 +32,9 @@ export default function MoviePage() {
 
   useEffect(() => {
     const apiURL =
-      process.env.NODE_ENV === "development"
-        ? `http://localhost:3000/movie/${id}`
-        : `https://api.themoviedb.org/3/movie/${id}?language=en-US&api_key=${apiKey}&append_to_response=videos`;
+      process.env.NODE_ENV === "production"
+        ? `https://api.themoviedb.org/3/movie/${id}?language=en-US&api_key=${apiKey}&append_to_response=videos`
+        : `http://localhost:3000/movie/${id}`;
     fetch(apiURL)
       .then((res) => {
         if (!res.ok) {

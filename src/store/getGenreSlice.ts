@@ -10,9 +10,9 @@ const initialState = {
 
 export const getGenres = createAsyncThunk("genres/getGenres", async () => {
   const apiURL =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3000/genres"
-      : `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en`;
+    process.env.NODE_ENV === "production"
+      ? `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en`
+      : "http://localhost:3000/genres";
   const response = await fetch(apiURL);
   const data = await response.json();
   return data;
